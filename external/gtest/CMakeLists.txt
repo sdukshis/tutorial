@@ -6,4 +6,4 @@ find_package(gtest ${GTEST_VERSION} EXACT REQUIRED)
 if (GTEST_FOUND)
     set_target_properties(GTest::GTest PROPERTIES INTERFACE_COMPILE_FEATURES cxx_std_11)
     set_target_properties(GTest::Main PROPERTIES IMPORTED_GLOBAL TRUE)
-endif
+endif()
