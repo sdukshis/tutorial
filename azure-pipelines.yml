@@ -1,0 +1,43 @@
+jobs:
+  - job: Linux
+    pool:
+      vmImage: 'Ubuntu 18.04'
+
+    steps:
+    - script: |
+        sudo apt update 
+        sudo apt install -yy gcc cmake
+      displayName: "Install build toolchain"
+    - script: |
+        mkdir build && cd build
+        cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=OFF
+      displayName: 'Configure'
+    - script: |
+        cd build
+        cmake --build .
+      displayName: 'Build'
+  - job: Windows
+    pool:
+      vmImage: 'vs2017-win2016'
+
+    steps:
+    - script: |
+        mkdir build && cd build
+        cmake .. -DBUILD_TESTS=OFF
+      displayName: 'Configure'
+    - script: |
+        cd build
+      displayName: 'Build'
+  - job: MacOS
+    pool:
+      vmImage: 'macOS-10.13'
+
+    steps:
+    - script: |
+        mkdir build && cd build
+        cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=OFF
+      displayName: 'Configure'
+    - script: |
+        cd build
+        cmake --build .
+      displayName: 'Build'
