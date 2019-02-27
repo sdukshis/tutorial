@@ -9,8 +9,9 @@ jobs:
         sudo apt install -yy gcc cmake
       displayName: "Install build toolchain"
     - script: |
+        cmake --version
         mkdir build && cd build
-        cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=OFF
+        cmake .. -DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTS=OFF
       displayName: 'Configure'
     - script: |
         cd build
@@ -22,11 +23,13 @@ jobs:
 
     steps:
     - script: |
+        cmake --version
         mkdir build && cd build
         cmake .. -DBUILD_TESTS=OFF
       displayName: 'Configure'
     - script: |
         cd build
+        cmake . --build Debug
       displayName: 'Build'
   - job: MacOS
     pool:
@@ -34,8 +37,9 @@ jobs:
 
     steps:
     - script: |
+        cmake --version
         mkdir build && cd build
-        cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=OFF
+        cmake .. -DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTS=OFF
       displayName: 'Configure'
     - script: |
         cd build
